@@ -10,7 +10,7 @@ const TodoListItem = ({ label, important = false }) => {
 
         return (
             < span className = "todo-list-item"
-                        style = { style } >
+                   style = { style } >
                     { label }
             </span >
         );
