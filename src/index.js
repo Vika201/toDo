@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import AppHeader from './components/app-header';
 import SearchPanel from './components/search-panel';
 import TodoList from './components/todo-list';
+import ItemStatusFilter from "./components/item-status-filter";
 
 const App = () => {
 
@@ -13,18 +14,17 @@ const App = () => {
         { label: 'Have a lunch', important: false, id: 3 }
     ]
 
-    return ( <
-        div > <
-        AppHeader / >
-        <
-        SearchPanel / >
-
-        <
-        TodoList todos = { todoDate }
-        / > < /
-        div >
+    return (
+        <div>
+            <AppHeader/>
+            <div>
+                <SearchPanel/>
+                <ItemStatusFilter/>
+            </div>
+            <TodoList todos = { todoDate }/>
+        </div >
     );
 };
 
-ReactDOM.render( < App / > ,
+ReactDOM.render( <App/> ,
     document.getElementById('root'));
