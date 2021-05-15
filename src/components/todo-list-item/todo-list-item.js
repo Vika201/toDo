@@ -5,43 +5,55 @@ import './todo-list-item.css';
 export default class TodoListItem extends Component {
 
     state = {
-        done: false,
-        important: false
-    };
+        important: false,
+        done: false
+    }
+
+    onLabelClick = () => {
+        this.setState(({done}) => {
+            return {
+               done: !done
+            }
+        })
+    }
+
+    onLabelImportant = () => {
+        this.setState(({important}) => {
+            return {
+                important: !important
+            }
+        })
+    }
 
     render() {
+        const { label } = this.props;
+        const {important, done} = this.state;
 
-        const { label, onDeleted,
-                onToggleImportant,
-                onToggleDone,
-                done, important } = this.props;
-
-        let classNames = 'todo-list-item'
-        if (done) {
-            classNames +=  ' done';
-        }
-
+        let classNames = 'todo-list-item';
         if (important) {
-            classNames += ' important';
+            classNames += ' important'
         }
+        if (done) {
+            classNames += ' done'
+        }
+
 
         return (
             <span className={classNames}>
             < span className = "todo-list-item-label"
-                    onClick = { onToggleDone }>
+                   onClick={this.onLabelClick}>
                     { label }
             </span >
 
             <button type="button"
                     className="btn btn-outline-success btn-sm float-right"
-                    onClick = { onToggleImportant }>
+                    onClick={this.onLabelImportant}>
                 <i className="fa fa-exclamation" />
             </button>
 
              <button type="button"
                      className="btn btn-outline-danger btn-sm float-right"
-                    onClick = { onDeleted }
-                     >
+                     onClick={this.props.onDeleted}>
                   <i className="fa fa-trash-o"
                  />
             </button>
