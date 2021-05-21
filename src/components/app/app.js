@@ -5,17 +5,44 @@ import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
 import ItemStatusFilter from '../item-status-filter';
+import ItemAddForm from "../item-add-form";
 import './app.css';
 
 export default class App extends Component {
 
+    maxId = 100;
+
     state = {
         todoData: [
-            {label: "Drink Coffee", important: true, id: 1},
-            {label: "Make Awesome App", important: true, id: 2},
-            {label: "Have a lunch", important: false, id: 3}
+            this.createTodoItem("Drink Coffee"),
+            this.createTodoItem("Make Awesome App"),
+            this.createTodoItem("Have a lunch")
             ]
     }
+
+    createTodoItem(label) {
+        return {
+            label,
+            important: false,
+            done: false,
+            id: this.maxId++
+        }
+    }
+
+    onAddedItem = (text) => {
+    this.setState(({todoData}) => {
+        const newItem = this.createTodoItem(text)
+
+        const newArr = [
+            ...todoData,
+            newItem
+        ]
+        return {
+            todoData: newArr
+        }
+    })
+    }
+
 
     onDeleted = (id) => {
         this.setState(({ todoData }) => {
@@ -32,6 +59,8 @@ export default class App extends Component {
     }
 
 
+
+
     render() {
 
         return (
@@ -44,6 +73,7 @@ export default class App extends Component {
                 <TodoList todos={this.state.todoData}
                           className="i-todo-list"
                           onDeleted={(id) => this.onDeleted(id)}/>
+                <ItemAddForm onAddedItem={this.onAddedItem}/>
             </div >
         );
     }

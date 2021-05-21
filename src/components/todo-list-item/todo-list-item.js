@@ -17,7 +17,7 @@ export default class TodoListItem extends Component {
         })
     }
 
-    onLabelImportant = () => {
+    onMarkImportant = () => {
         this.setState(({important}) => {
             return {
                 important: !important
@@ -47,7 +47,7 @@ export default class TodoListItem extends Component {
 
             <button type="button"
                     className="btn btn-outline-success btn-sm float-right"
-                    onClick={this.onLabelImportant}>
+                    onClick={this.onMarkImportant}>
                 <i className="fa fa-exclamation" />
             </button>
 
