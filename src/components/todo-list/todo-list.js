@@ -10,13 +10,17 @@ export default class TodoList extends Component {
         const elements = todos.map((item) => {
 
             const {id, ...itemProps} = item;
-            const {onDeleted} = this.props;
+            const { onDeleted,
+                    onToggleDone,
+                    onToggleImportant } = this.props;
             return (
                 <li key={id}
                     className="list-group-item">
                     <TodoListItem
                         {...itemProps}
-                        onDeleted={() => onDeleted(id)}/>
+                        onDeleted={() => onDeleted(id)}
+                        onToggleDone={() => onToggleDone(id)}
+                        onToggleImportant={() => onToggleImportant(id)} />
                 </li>
             );
         })

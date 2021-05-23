@@ -9,13 +9,7 @@ export default class TodoListItem extends Component {
         done: false
     }
 
-    onLabelClick = () => {
-        this.setState(({done}) => {
-            return {
-               done: !done
-            }
-        })
-    }
+
 
     onMarkImportant = () => {
         this.setState(({important}) => {
@@ -26,8 +20,11 @@ export default class TodoListItem extends Component {
     }
 
     render() {
-        const { label } = this.props;
-        const {important, done} = this.state;
+        const { label,
+                onToggleDone,
+                onToggleImportant,
+                important,
+                done} = this.props;
 
         let classNames = 'todo-list-item';
         if (important) {
@@ -40,24 +37,23 @@ export default class TodoListItem extends Component {
 
         return (
             <span className={classNames}>
-            < span className = "todo-list-item-label"
-                   onClick={this.onLabelClick}>
+                < span className = "todo-list-item-label"
+                   onClick={onToggleDone}>
                     { label }
-            </span >
+                </span >
 
-            <button type="button"
-                    className="btn btn-outline-success btn-sm float-right"
-                    onClick={this.onMarkImportant}>
-                <i className="fa fa-exclamation" />
-            </button>
+                <button type="button"
+                        className="btn btn-outline-success btn-sm float-right"
+                        onClick={onToggleImportant}>
+                    <i className="fa fa-exclamation" />
+                </button>
 
-             <button type="button"
-                     className="btn btn-outline-danger btn-sm float-right"
-                     onClick={this.props.onDeleted}>
-                  <i className="fa fa-trash-o"
-                 />
-            </button>
-        </span>
+                <button type="button"
+                        className="btn btn-outline-danger btn-sm float-right"
+                        onClick={this.props.onDeleted}>
+                  <i className="fa fa-trash-o" />
+                </button>
+            </span>
         );
     };
 };
